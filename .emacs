@@ -24,7 +24,14 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  ;;(add-to-list 'auto-mode-alist '("\\.module?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.module?\\'" . web-mode))
+  )
+
+(use-package rainbow-mode
+  :ensure t
+  :config
+  (add-hook 'less-css-mode-hook (lambda () (rainbow-mode 1)))
+  (add-hook 'web-mode-hook (lambda () (rainbow-mode 1)))
   )
 
 (use-package web-beautify
@@ -32,6 +39,10 @@
   :config
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
   (setq exec-path (append exec-path '("/usr/local/bin")))
+  )
+
+(use-package vue-mode
+  :ensure t
   )
 
 (use-package js2-mode
@@ -44,14 +55,15 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.module\\'" . php-mode))
   )
 
 (defun kill-other-buffers ()
-    "Kill all other buffers."
-    (interactive)
-    (mapc 'kill-buffer 
-          (delq (current-buffer) 
-                (remove-if-not 'buffer-file-name (buffer-list)))))
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer 
+	(delq (current-buffer) 
+	      (remove-if-not 'buffer-file-name (buffer-list)))))
 
 
 (use-package flycheck
@@ -134,9 +146,10 @@
    (quote
     ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
+ '(mac-right-option-modifier nil)
  '(package-selected-packages
    (quote
-    (xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized))))
+    (rainbow-mode less-css-mode skewer-mode simple-httpd lorem-ipsum vue-mode xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
