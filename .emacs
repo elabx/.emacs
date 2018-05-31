@@ -1,20 +1,31 @@
-(setq custom-safe-themes t)
-(require 'package)
+(require 'package) 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
 
+(setq-default header-line-format 
+              (list " " (make-string 79 ?-) "|"))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package yasnippet
+  :config
+  (yas-reload-all))
+
 (use-package web-mode
   :ensure t
   :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
+   (setq web-mode-markup-indent-offset 4)
+   (setq web-mode-code-indent-offset 4)
+      
+
+
+
+   (web-mode-use-tabs)
   
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\.module\\'" . web-mode))
@@ -25,7 +36,17 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.module?\\'" . web-mode))
+
   )
+
+(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g i" . dumb-jump-go-prompt)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window))
+  :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+  :ensure)
 
 (use-package rainbow-mode
   :ensure t
@@ -49,6 +70,8 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist (cons (rx ".js" eos) 'js2-mode))
+  (setq js-indent-level 8)
+
   )
 
 (use-package php-mode
@@ -77,9 +100,10 @@
 (use-package color-theme-sanityinc-solarized
   :ensure t
   :config
-  (color-theme-sanityinc-solarized-dark))
+  (load-theme 'sanityinc-solarized-dark t)
+  )
 
-(setq web-mode-markup-indent-offset 2)
+;; (setq web-mode-markup-indent-offset 2)	
 
 (use-package helm
   :ensure t
@@ -125,8 +149,16 @@
 
 (show-paren-mode 1)
 (set-default 'truncate-lines t)
-(desktop-change-dir "~/.emacs.d/desktop")
+
+(when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+
+
+
 (desktop-save-mode 1)
+
+(setq desktop-files-not-to-save "^$")
+
+
 (setq backup-by-copying t)
 
 ;;Stop creating autosave and backup files
@@ -145,16 +177,16 @@
  '(custom-safe-themes
    (quote
     ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+ '(electric-indent-mode nil)
  '(mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
  '(mac-right-option-modifier nil)
  '(package-selected-packages
    (quote
-    (rainbow-mode less-css-mode skewer-mode simple-httpd lorem-ipsum vue-mode xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized))))
+    (dumb-jump rainbow-mode less-css-mode skewer-mode simple-httpd lorem-ipsum vue-mode xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized)))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
