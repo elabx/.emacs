@@ -5,8 +5,18 @@
 
 (package-initialize)
 
+(setq indent-tabs-mode t)
+(setq-default tab-width 4)
+
 (setq-default header-line-format 
               (list " " (make-string 79 ?-) "|"))
+
+(require 'dired )
+
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ;was dired-advertised-find-file
+
+;;(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
+
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -21,10 +31,6 @@
   :config
    (setq web-mode-markup-indent-offset 4)
    (setq web-mode-code-indent-offset 4)
-      
-
-
-
    (web-mode-use-tabs)
   
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -190,3 +196,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'dired-find-alternate-file 'disabled nil)
