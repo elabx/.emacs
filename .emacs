@@ -182,13 +182,13 @@
  '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
  '(custom-safe-themes
    (quote
-    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+	("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-indent-mode nil)
  '(mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
  '(mac-right-option-modifier nil)
  '(package-selected-packages
    (quote
-    (dumb-jump rainbow-mode less-css-mode skewer-mode simple-httpd lorem-ipsum vue-mode xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized)))
+	(typescript-mode helm-css-scss dumb-jump rainbow-mode less-css-mode skewer-mode simple-httpd lorem-ipsum vue-mode xah-css-mode web-mode web-beautify use-package swiper-helm php-mode multiple-cursors magit js2-mode flycheck expand-region emacsql-psql company color-theme-sanityinc-solarized)))
  '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -197,3 +197,5 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
